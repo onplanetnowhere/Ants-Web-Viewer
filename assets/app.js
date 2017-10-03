@@ -193,11 +193,7 @@ GUI.prototype.restartGame = function(){
 
 $('#antsTableRow').on('click', ".ant-row", function() {
     if ($(this).attr('data-disabled') == 1) {
-        swal({
-            title: "Cannot Select " + $(this).attr('data-name') + " Ant",
-            text: "You do not have enough food.",
-            type: "error",
-        });
+        toastr["error"]("You do not have enough food.", "Cannot Select " + $(this).attr('data-name') + " Ant");
         return false;
     }
     currentSelected = gui.get_selectedAnt();
@@ -238,11 +234,7 @@ $('.places-table').on('click', '.places-td', function() {
     //Deselect ant
     gui.deselectAnt();
     if (!selectedAnt) {
-        swal({
-            title: "Error",
-            text: "You need to select an insect first.",
-            type: "error",
-        });
+        toastr["error"]("You need to select an insect first.", "Error");
     }
     if (selectedAnt["food"] > gui.get_food()) {
         swal({
