@@ -332,7 +332,7 @@ GUI.prototype.update = function() {
             );
         } else {
             swal({
-                title: "Tough Luck",
+                title: "Tasdfsdfough Luck",
                 text: "You lost and the bees live on.",
                 type: "warning",
                 confirmButtonColor: "#0b752b",
