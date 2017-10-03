@@ -110,12 +110,7 @@ GUI.prototype.get_gameState = function() {
         if(!gui.initialised){
           setTimeout(gui.get_gameState(), 500)
         }else{
-          swal({
-              title: "Error",
-              text: e,
-              type: "error",
-              showConfirmButton: false,
-              });
+          toastr["error"]("e", "Error");
         }
     });
 };
