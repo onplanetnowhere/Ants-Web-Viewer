@@ -296,7 +296,7 @@ def removed_ant(self, rv, *args):
             gui.saveState("deadinsects", gui.deadinsects)
 
 def update():
-    request = urllib.request.Request("https://api.github.com/repos/colinschoen/Ants-Web-Viewer/releases/latest")
+    request = urllib.request.Request("https://api.github.com/repos/onplanetnowhere/Ants-Web-Viewer/releases/latest")
     data = None
     print("Checking for updates...")
     try:
