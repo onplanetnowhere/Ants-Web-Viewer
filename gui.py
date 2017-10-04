@@ -279,7 +279,6 @@ class HttpHandler(http.server.SimpleHTTPRequestHandler):
             self.wfile.write(response.encode('ascii'))
 
 def dead_insects(self, rv, *args):
-    print(self,'dead_insect')
     if self.armor <= 0 and self:
         print('{0} ran out of armor and expired'.format(self))
         if self in gui.insectToId:
@@ -289,7 +288,6 @@ def dead_insects(self, rv, *args):
             gui.deadbees.append(gui.beeToId[self])
             gui.saveState("deadbees", gui.deadbees)
 def removed_ant(self, rv, *args):
-    print(self,'removed ant')
     r = gui.get_place_row(args[0])
     c = gui.get_place_column(args[0])
     if c in gui.places[r]:
