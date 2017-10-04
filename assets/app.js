@@ -110,7 +110,11 @@ GUI.prototype.get_gameState = function() {
         if(!gui.initialised){
           setTimeout(gui.get_gameState(), 500)
         }else{
-          toastr["error"]("e", "Error");
+          toastr.options = {
+            "preventDuplicates": true,
+            "timeOut": "3000"
+          };
+          toastr["error"](e, "Error");
         }
     });
 };
@@ -193,6 +197,10 @@ GUI.prototype.restartGame = function(){
 
 $('#antsTableRow').on('click', ".ant-row", function() {
     if ($(this).attr('data-disabled') == 1) {
+        toastr.options = {
+            "preventDuplicates": true,
+            "timeOut": "3000"
+        };
         toastr["error"]("You do not have enough food.", "Cannot Select " + $(this).attr('data-name') + " Ant");
         return false;
     }
@@ -234,14 +242,18 @@ $('.places-table').on('click', '.places-td', function() {
     //Deselect ant
     gui.deselectAnt();
     if (!selectedAnt) {
+        toastr.options = {
+            "preventDuplicates": true,
+            "timeOut": "3000"
+        };
         toastr["error"]("You need to select an insect first.", "Error");
     }
     if (selectedAnt["food"] > gui.get_food()) {
-        swal({
-            title: "Error",
-            text: "Not enough food remains to place " + selectedAnt["name"],
-            type: "error",
-        });
+        toastr.options = {
+            "preventDuplicates": true,
+            "timeOut": "3000"
+        };
+        toastr["error"]("Not enough food remains to place " + selectedAnt["name"], "Error");
     }
     $.ajax({
         method: "POST",
@@ -250,11 +262,11 @@ $('.places-table').on('click', '.places-td', function() {
     })
         .done(function(response) {
             if (response["error"]) {
-                swal({
-                    title: "Error",
-                    text: response["error"],
-                    type: "error",
-                });
+                toastr.options = {
+                    "preventDuplicates": true,
+                    "timeOut": "3000"
+                };
+                toastr["error"](response["error"], "Error");
             }        
             else {
                 //$(t).find('.tunnel-img-container').html('<img data-id="' + response["id"]  +'" class="active-ant" src="' + selectedAnt["img"]  + '">');

@@ -60,8 +60,8 @@ class GUI:
 
     def makeHooks(self):
         ants.Insect.reduce_armor = utils.class_method_wrapper(ants.Insect.reduce_armor, post=dead_insects)
+        ants.FireAnt.reduce_armor = utils.class_method_wrapper(ants.FireAnt.reduce_armor, post=dead_insects)
         ants.AntColony.remove_ant = utils.class_method_wrapper(ants.AntColony.remove_ant, post=removed_ant)
-    
 
     def newGameThread(self):
         print("Trying to start new game")
@@ -279,6 +279,7 @@ class HttpHandler(http.server.SimpleHTTPRequestHandler):
             self.wfile.write(response.encode('ascii'))
 
 def dead_insects(self, rv, *args):
+    print(self,'dead_insect')
     if self.armor <= 0 and self:
         print('{0} ran out of armor and expired'.format(self))
         if self in gui.insectToId:
@@ -288,6 +289,7 @@ def dead_insects(self, rv, *args):
             gui.deadbees.append(gui.beeToId[self])
             gui.saveState("deadbees", gui.deadbees)
 def removed_ant(self, rv, *args):
+    print(self,'removed ant')
     r = gui.get_place_row(args[0])
     c = gui.get_place_column(args[0])
     if c in gui.places[r]:
@@ -296,7 +298,7 @@ def removed_ant(self, rv, *args):
             gui.saveState("deadinsects", gui.deadinsects)
 
 def update():
-    request = urllib.request.Request("https://api.github.com/repos/onplanetnowhere/Ants-Web-Viewer/releases/latest")
+    request = urllib.request.Request("https://api.github.com/repos/colinschoen/Ants-Web-Viewer/releases/latest")
     data = None
     print("Checking for updates...")
     try:
@@ -383,4 +385,3 @@ def run(*args):
     except Exception:
         print("Unable to automatically open web browser.")
         print("Point your browser to http://localhost:" + str(PORT) + '/gui.html')
-
