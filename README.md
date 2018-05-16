@@ -1,6 +1,9 @@
 # Ants-Web-Viewer
 CS61A Ants Project Web GUI
 
+How the new notifications look:
+https://i.imgur.com/Ywc138K.png
+
 ## Contributors
 
 | Name             | GitHub                              |
